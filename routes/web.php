@@ -15,8 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('admin', 'Admin\\DashboardController@index');
+Route::get('admin', 'Admin\\DashboardController@index')->middleware('auth');
 
-Route::resource('admin/posts', 'Admin\\PostsController');
+Route::resource('admin/posts', 'Admin\\PostsController')->middleware('auth');
 
-Route::resource('admin/categories', 'Admin\\CategoriesController');
+Route::resource('admin/categories', 'Admin\\CategoriesController')->middleware('auth');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
